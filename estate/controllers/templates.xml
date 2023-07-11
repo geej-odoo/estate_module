@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="index">
+    <t t-call="website.layout">
+      <t t-set="title">Estate Property</t>
+      <div class="oe_structure">
+        <div class="container">
+          <t t-foreach="properties" t-as="property">
+            <p>
+              <h5 t-field="property.name" />
+            </p>
+          </t>
+        </div>
+      </div>
+    </t>
+  </template>
+
+  <!-- <template id="main">
+    <t t-call="website.layout">
+      <t t-set="title">Properties</t>
+      <div class="oe_structure">
+        <form>
+          <input type="date" name="listed_after_date"
+            class="form-control o_website_form_input o_website_form_date" />
+          <button type="submit" name="listed_after_button" class="btn btn-primary">Listed After</button>
+
+          <div class="container">
+            <div class="row gy-5">
+              <t t-foreach="properties" t-as="property">
+
+                <div class="col-sm-3">
+                  <a t-attf-href="/properties/{{ property.id }}">
+
+                    <div class="card" style="width: 18rem;">
+                        <img t-if="property.image"
+                                    t-att-src="'data:image/jpg;base64,' + roperty.image.decode('utf-8')"
+                                    class="card-img-top" alt="..." />
+                      <div class="card-body">
+
+                        <h5 class="card-title">
+                          <t t-esc="property.name" />
+                        </h5>
+                        <div class="card-text">
+                          <p>Price: <t t-esc="property.expected_price" /></p>
+                          <t t-set="tag" t-value="property.mapped('tag_ids')" />
+                          <t t-foreach="tag" t-as="t">
+                            <span t-field="t.name" class="badge rounded-pill bg-info text-dark" />
+
+
+                          </t>
+                        </div>
+
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </t>
+
+            </div>
+            <div>
+              <t t-call="website.pager" />
+
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </t>
+  </template> -->
+
+  <template id="main">
+    <t t-call="website.layout">
+      <t t-set="title">Properties</t>
+
+      <div class="oe_structure">
+        <div class="container-fluid">
+          <div class='d-flex flex-column flex-sm-row justify-content-between w-100'>
+            <div>
+              <h1>Properties</h1>
+            </div>
+            <div class="date_picker" style="margin:0 1rem 0 1rem">
+              <form>
+                <label>Listed After: <input type="date" name="date"></input></label>
+                <button type="submit" class="btn btn-primary">Search</button>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <t t-foreach="properties" t-as="property">
+              <!-- <div class="col-sm">
+                                    <p t-esc="Property.name"></p>
+                                </div> -->
+              <div class="card" style="width: 18rem;">
+                <img t-if="property.image"
+                  t-att-src="'data:image/jpg;base64,' + property.image.decode('utf-8')"
+                  class="card-img-top" alt="..." />
+
+                <div class="card-body"> Name :<h5 t-esc="property.name"></h5> Selling Price :<p
+                    class="card-text"
+                    t-field="property.selling_price"></p>
+                   <a
+                    t-attf-href="/properties/{{ property.id }}"
+                    class="btn btn-primary">Property Details</a>
+                </div>
+              </div>
+            </t>
+          </div>
+        </div>
+        <div t-if="pager" class="o_portal_pager d-flex justify-content-center mt-3">
+          <t t-call="website.pager">
+          </t>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+
+  <template id="property_template">
+    <t t-call="website.layout">
+      <t t-set="title">
+        <!-- <t t-esc="property.name" /> -->
+      </t>
+      <div class="oe_structure" />
+      <div class="oe_structure">
+        <div class="container">
+        <t t-foreach="properties" t-as="property">
+          <div style="display:flex">
+            <table class="table" style="width:70%;">
+              <tr>
+                <td>
+                  <h3>
+                    <t t-esc="property.name" />
+                  </h3>
+                </td>
+              </tr>
+              <tr>
+                <td>Expected Price:<t t-esc="property.expected_price" /></td>
+              </tr>
+              <tr>
+                <td>Description:<t t-esc="property.description" /></td>
+              </tr>
+            </table>
+            <img t-attf-src="data:image/png;base64,#{property.image}" height="300px"
+              width="400px" alt="Property Image" />
+          </div>
+
+
+          <div>
+          </div>
+      </t>
+        </div>
+      </div>
+      <div class="oe_structure" />
+    </t>
+  </template>
+
+</odoo>

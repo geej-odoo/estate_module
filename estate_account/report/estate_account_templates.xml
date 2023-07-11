@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <template id="report_invoicing" 
+    inherit_id="estate.report_property">
+        <xpath expr="//div[@id='table']" position="before">
+
+        <template id="report_invoicing" 
+        inherit_id="estate.report_property"></template>
+
+
+        <t t-foreach="docs" t-as='property'>
+
+            <t t-if="property.state=='solded'">
+                <div>
+                    <strong>Invoice has been already created!!!!</strong>
+                </div>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>
